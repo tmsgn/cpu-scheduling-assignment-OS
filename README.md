@@ -70,3 +70,14 @@ Credits
 - Created for an Operating Systems course assignment.
 
 Enjoy exploring CPU scheduling! 🚀
+
+## Group Members — Group 7
+
+1. BDU1602534 — Temesgen Tarekegn
+2. BDU1602667 — Wintana Girma
+3. BDU1602708 — Yalemzewud Tenaw
+4. BDU1602761 — Yetmwork Lakachew
+5. BDU1602875 — Yordanos Tsehay
+6. BDU1602881 — Yosef Tadesse
+7. BDU1602880 — Yosef Melaku
+8. BDU1602906 — Zelalem Ybabe
