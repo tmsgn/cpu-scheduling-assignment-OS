@@ -1,7 +1,10 @@
 import java.util.*;
 
+// Banker's Algorithm implementation utilities
+// Provides interactive and sample-run entry points to check system safety
 public class Bankers {
 
+    // Sample data runner for quick demonstration/testing
     public static void runSample() {
         int[][] max = {
                 {7, 5, 3},
@@ -20,6 +23,7 @@ public class Bankers {
         run(max.length, max[0].length, max, alloc, avail);
     }
 
+    // Interactive runner: reads matrices from provided Scanner
     public static void run(Scanner sc) {
         System.out.println("\n--- Banker's Algorithm ---");
 
@@ -56,11 +60,16 @@ public class Bankers {
         run(n, m, max, alloc, avail);
     }
 
+    // Core algorithm: computes if the system is in a safe state and prints
+    // a safe sequence if one exists. `max` is the maximum demand matrix,
+    // `alloc` is the currently allocated resources, and `avail` is the
+    // currently available resources vector.
     private static void run(int n, int m, int[][] max, int[][] alloc, int[] avail) {
         System.out.println("\n--- Banker's Algorithm ---");
 
         int[][] need = new int[n][m];
 
+        // need = max - alloc
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 need[i][j] = max[i][j] - alloc[i][j];
@@ -72,6 +81,7 @@ public class Bankers {
 
         int count = 0;
 
+        // Try to find a process whose needs can be satisfied
         while (count < n) {
             boolean found = false;
 
@@ -83,6 +93,7 @@ public class Bankers {
                             break;
                     }
 
+                    // if all needs <= avail, mark finished and release resources
                     if (j == m) {
                         for (int k = 0; k < m; k++) {
                             avail[k] += alloc[i][k];

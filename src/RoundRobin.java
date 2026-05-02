@@ -1,7 +1,10 @@
 import java.util.*;
 
+// Round Robin scheduling (preemptive) with a fixed time quantum q
 public class RoundRobin {
 
+    // Runs round-robin on `list` using quantum `q`. Uses a queue of indices
+    // and tracks remaining time (`rt`) for each process.
     public static void run(List<Process> list, int q) {
         Utils.println("\n=== Round Robin (q=2) ===");
 
@@ -17,6 +20,7 @@ public class RoundRobin {
 
         List<String> gantt = new ArrayList<>();
 
+        // start with first process (assumes list[0] arrives at or before time 0)
         queue.add(0);
         visited[0] = true;
 
@@ -27,6 +31,7 @@ public class RoundRobin {
 
             int exec = Math.min(q, rt[i]);
 
+            // execute for up to quantum or remaining time
             for (int t = 0; t < exec; t++) {
                 gantt.add(p.id);
                 time++;
@@ -34,6 +39,7 @@ public class RoundRobin {
 
             rt[i] -= exec;
 
+            // enqueue newly arrived processes
             for (int j = 0; j < n; j++) {
                 if (!visited[j] && list.get(j).at <= time) {
                     queue.add(j);
@@ -41,6 +47,8 @@ public class RoundRobin {
                 }
             }
 
+            // if process still has remaining time, requeue it;
+            // otherwise record completion metrics
             if (rt[i] > 0) {
                 queue.add(i);
             } else {
