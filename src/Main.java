@@ -2,6 +2,8 @@ import java.util.*;
 
 public class Main {
 
+    private static final int ROUND_ROBIN_QUANTUM = 2;
+
     public static List<Process> sampleProcesses() {
         return Arrays.asList(
                 new Process("P1", 0, 7),
@@ -30,24 +32,62 @@ public class Main {
         return list;
     }
 
+    private static void printAlgorithmMenu() {
+        System.out.println("\nChoose an algorithm:");
+        System.out.println("1. FCFS");
+        System.out.println("2. SJF");
+        System.out.println("3. SRTF");
+        System.out.println("4. Round Robin");
+        System.out.println("5. Banker's Algorithm");
+        System.out.println("6. Run All Scheduling Algorithms");
+    }
+
+    private static void runSelectedAlgorithm(int choice, List<Process> processes) {
+        switch (choice) {
+            case 1:
+                FCFS.run(new ArrayList<>(processes));
+                break;
+            case 2:
+                SJF.run(new ArrayList<>(processes));
+                break;
+            case 3:
+                SRTF.run(new ArrayList<>(processes));
+                break;
+            case 4:
+                RoundRobin.run(new ArrayList<>(processes), ROUND_ROBIN_QUANTUM);
+                break;
+            case 6:
+                FCFS.run(new ArrayList<>(processes));
+                SJF.run(new ArrayList<>(processes));
+                SRTF.run(new ArrayList<>(processes));
+                RoundRobin.run(new ArrayList<>(processes), ROUND_ROBIN_QUANTUM);
+                break;
+            default:
+                System.out.println("Invalid algorithm choice.");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("1. Sample Data");
         System.out.println("2. User Input");
-        int choice = sc.nextInt();
+        int dataChoice = sc.nextInt();
 
-        List<Process> processes = (choice == 1) ? sampleProcesses() : inputProcesses(sc);
+        List<Process> processes = (dataChoice == 1) ? sampleProcesses() : inputProcesses(sc);
 
-        FCFS.run(new ArrayList<>(processes));
-        SJF.run(new ArrayList<>(processes));
-        SRTF.run(new ArrayList<>(processes));
-        RoundRobin.run(new ArrayList<>(processes), 2);
+        printAlgorithmMenu();
+        int algorithmChoice = sc.nextInt();
 
-        if (choice == 1) {
-            Bankers.runSample();
-        } else {
-            Bankers.run(sc);
+        if (algorithmChoice == 5) {
+            if (dataChoice == 1) {
+                Bankers.runSample();
+            } else {
+                Bankers.run(sc);
+            }
+            return;
         }
+
+        runSelectedAlgorithm(algorithmChoice, processes);
     }
 }

@@ -1,77 +1,133 @@
 # CPU Scheduling & Banker's Algorithm (Java)
 
-## Overview
+## 📌 Overview
 
-This project implements important concepts of Operating Systems:
+This project implements key concepts of Operating Systems:
 
 - CPU Scheduling algorithms
 - Deadlock avoidance using Banker’s Algorithm
 
-The program simulates how processes are executed and evaluates system performance using standard scheduling metrics.
+The program simulates how processes are scheduled and executed, and evaluates system performance using standard metrics.
 
-## Objectives
+---
+
+## 🎯 Objectives
 
 - Understand CPU scheduling techniques
 - Compare preemptive and non-preemptive algorithms
 - Calculate performance metrics (CT, WT, TAT)
+- Understand deadlocks and safe states
+- Implement Banker’s Algorithm for deadlock avoidance
 
-# ⚙️ CPU Scheduling Assignment (OS)
+---
 
-A small Java project implementing common CPU scheduling algorithms and basic resource allocation (Banker's algorithm) for an Operating Systems assignment. Designed to be easy to run, inspect, and extend.
+## ⚙️ Implemented Algorithms
 
-Features
+- FCFS (First Come First Served) – Non-preemptive
+- SJF (Shortest Job First) – Non-preemptive
+- SRTF (Shortest Remaining Time First) – Preemptive
+- Round Robin – Preemptive (Time Quantum = 2)
+- Banker’s Algorithm – Deadlock avoidance
 
-- Implements several scheduling strategies: FCFS, SJF, SRTF, Round Robin
-- Includes a Banker's algorithm implementation for safe-state checks
-- Example input/output files in `input/` and `output/`
-- Simple CLI runner via `Main.java` in `src/`
+---
 
-Why this repo is cool
+## ✨ Features
 
-- Clear, educational code: each algorithm is implemented in its own class under `src/`
-- Plug-and-play: swap input files or add new scheduling policies
-- Nice for demos, assignments, and teaching OS concepts
+- Multiple CPU scheduling algorithms
+- Banker’s Algorithm for safe-state checking
+- Modular code (each algorithm in its own class)
+- Supports both sample input and user input
+- Gantt chart-style execution output
+- Calculates:
+  - Completion Time (CT)
+  - Turnaround Time (TAT)
+  - Waiting Time (WT)
+  - Average WT and TAT
+- Includes sample input/output files
+- Handles CPU idle time correctly
 
-Getting started
+---
 
-1. Ensure you have Java (JDK 8+) installed.
-2. From the project root, compile the sources:
+## 🚀 Getting Started
 
-```bash
-javac -d bin src/*.java
-```
+### Requirements
 
-3. Run the program (example using the sample input):
+- Java JDK 8 or higher
 
-```bash
+### Compile
+
+javac -d bin src/\*.java
+
+### Run
+
+java -cp bin Main
+
+(Optional file input)
 java -cp bin Main input/sample_input.txt
-```
 
-Replace `input/sample_input.txt` with your own input file as needed. Output will be written to console or to a file depending on the program's arguments.
+---
 
-Project layout
+## 📁 Project Structure
 
-- `src/` — Java source files: `Main.java`, algorithm classes, and utilities
-- `input/` — sample input files (e.g., `sample_input.txt`)
-- `output/` — sample output files (e.g., `sample_output.txt`)
-- `screenshots/` — helpful images demonstrating program output
+cpu-scheduling-assignment/
+│
+├── src/
+│ ├── Main.java
+│ ├── Process.java
+│ ├── FCFS.java
+│ ├── SJF.java
+│ ├── SRTF.java
+│ ├── RoundRobin.java
+│ └── Bankers.java
+│
+├── input/
+│ └── sample_input.txt
+│
+├── output/
+│ └── sample_output.txt
+│
+└── README.md
 
-Tips
+---
 
-- To test Round Robin behavior, edit the time quantum in `RoundRobin.java` or pass it as an argument if supported by `Main`.
-- Use `input/sample_input.txt` to reproduce the included sample output in `output/sample_output.txt`.
+## 📊 Example Output
 
-Contributing
+Process AT BT CT TAT WT  
+P1 0 7 7 7 0  
+P2 2 4 11 9 5  
+...
 
-- Feel free to open issues or PRs to add features (e.g., Gantt chart export, GUI front-end, CSV input parsing).
+Gantt Chart:
+| P1 | P1 | P2 | P3 | ...
 
-Credits
+---
 
-- Created for an Operating Systems course assignment.
+## 🔐 Banker’s Algorithm
 
-Enjoy exploring CPU scheduling! 🚀
+Used to avoid deadlock by ensuring the system is in a safe state.
 
-## Group Members — Group 7
+Steps:
+
+1. Input MAX, ALLOCATION, AVAILABLE
+2. Compute NEED = MAX - ALLOCATION
+3. Check for safe sequence
+
+Output:
+
+- Safe sequence: P0 P1 P2
+- OR System is NOT in a safe state
+
+---
+
+## 💡 Tips
+
+- Modify the time quantum in RoundRobin.java to test different behaviors
+- Use sample_input.txt to reproduce sample outputs
+- Extend the project by adding new algorithms or a GUI
+
+---
+
+## 👥 Group Members — Group 7
 
 1. BDU1602534 — Temesgen Tarekegn
 2. BDU1602667 — Wintana Girma
@@ -81,3 +137,17 @@ Enjoy exploring CPU scheduling! 🚀
 6. BDU1602881 — Yosef Tadesse
 7. BDU1602880 — Yosef Melaku
 8. BDU1602906 — Zelalem Ybabe
+
+---
+
+## 🏫 Institution
+
+Bahir Dar University  
+Bahir Dar Institute of Technology  
+Faculty of Computing
+
+---
+
+## 📖 Conclusion
+
+This project demonstrates how CPU scheduling algorithms and Banker’s Algorithm work in practice, providing a clear understanding of process management, scheduling efficiency, and deadlock avoidance in operating systems.
